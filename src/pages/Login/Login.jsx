@@ -5,15 +5,23 @@ import {
   LoadCanvasTemplateNoReload,
   validateCaptcha,
 } from "react-simple-captcha";
+import useAuth from "../../hooks/useAuth";
+import { Link } from "react-router-dom";
 
 function Login() {
   const captchaRef = useRef();
   const [disabled, setDisabled] = useState(true);
+  const { signIn } = useAuth();
   const handleLogin = (e) => {
     e.preventDefault();
     const form = e.target;
     const email = form.email.value;
     const password = form.email.value;
+    signIn(email, password)
+      .then((res) => {
+        console.log(res.user);
+      })
+      .catch((err) => console.log(err));
   };
   const handleValidateCaptcha = (e) => {
     const userCaptchaValue = captchaRef.current.value;
@@ -97,6 +105,11 @@ function Login() {
               />
             </div>
           </form>
+          <p>
+            <small>
+              New Here? <Link to="/signup">Create a new account</Link>
+            </small>
+          </p>
         </div>
       </div>
     </div>

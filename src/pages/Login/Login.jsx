@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   loadCaptchaEnginge,
   LoadCanvasTemplate,
@@ -7,9 +7,9 @@ import {
 import useAuth from "../../hooks/useAuth";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+import Swal from "sweetalert2";
 
 function Login() {
-  const captchaRef = useRef();
   const [disabled, setDisabled] = useState(true);
   const { signIn } = useAuth();
   const handleLogin = (e) => {
@@ -20,11 +20,28 @@ function Login() {
     signIn(email, password)
       .then((res) => {
         console.log(res.user);
+        Swal.fire({
+          title: "User Login Successful",
+          showClass: {
+            popup: `
+              animate__animated
+              animate__fadeInUp
+              animate__faster
+            `,
+          },
+          hideClass: {
+            popup: `
+              animate__animated
+              animate__fadeOutDown
+              animate__faster
+            `,
+          },
+        });
       })
       .catch((err) => console.log(err));
   };
-  const handleValidateCaptcha = () => {
-    const userCaptchaValue = captchaRef.current.value;
+  const handleValidateCaptcha = (e) => {
+    const userCaptchaValue = e.target.value;
     console.log(userCaptchaValue);
     if (validateCaptcha(userCaptchaValue)) {
       setDisabled(false);
@@ -86,17 +103,14 @@ function Login() {
                   <LoadCanvasTemplate />
                 </label>
                 <input
+                  onBlur={handleValidateCaptcha}
                   type="text"
-                  ref={captchaRef}
                   placeholder="Type the captcha above"
                   name="captcha"
                   className="input input-bordered"
                   required
                 />
-                <button
-                  onClick={handleValidateCaptcha}
-                  className="btn btn-outline btn-xs mt-2"
-                >
+                <button className="btn btn-outline btn-xs mt-2">
                   Validate Captcha
                 </button>
               </div>

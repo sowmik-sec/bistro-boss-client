@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
 import { FaShoppingCart } from "react-icons/fa";
+import useCart from "../../../hooks/useCart";
 
 function Navbar() {
   const { user, logOut } = useAuth();
+  const [cart] = useCart();
   const handleLogOut = () => {
     logOut()
       .then(() => {})
@@ -29,7 +31,7 @@ function Navbar() {
       <li>
         <Link className="btn btn-ghost" to="/">
           <FaShoppingCart className="mr-2" />
-          <div className="badge badge-secondary">+0</div>
+          <div className="badge badge-secondary">+{cart?.length}</div>
         </Link>
       </li>
       {user ? (

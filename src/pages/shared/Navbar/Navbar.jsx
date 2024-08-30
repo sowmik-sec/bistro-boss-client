@@ -29,7 +29,7 @@ function Navbar() {
         </Link>
       </li>
       <li>
-        <Link className="btn btn-ghost" to="/">
+        <Link className="btn btn-ghost" to="/dashboard/cart">
           <FaShoppingCart className="mr-2" />
           <div className="badge badge-secondary">+{cart?.length}</div>
         </Link>

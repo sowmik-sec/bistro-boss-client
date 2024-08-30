@@ -11,13 +11,19 @@ function Navbar() {
   const navOptions = (
     <>
       <li>
-        <Link to="/">Home</Link>
+        <Link className="btn btn-ghost" to="/">
+          Home
+        </Link>
       </li>
       <li>
-        <Link to="/menu">Our Menu</Link>
+        <Link className="btn btn-ghost" to="/menu">
+          Our Menu
+        </Link>
       </li>
       <li>
-        <Link to="/order/soup">Order Food</Link>
+        <Link className="btn btn-ghost" to="/order/soup">
+          Order Food
+        </Link>
       </li>
       {user ? (
         <>
@@ -28,7 +34,9 @@ function Navbar() {
       ) : (
         <>
           <li>
-            <Link to="/login">Login</Link>
+            <Link className="btn btn-ghost" to="/login">
+              Login
+            </Link>
           </li>
         </>
       )}

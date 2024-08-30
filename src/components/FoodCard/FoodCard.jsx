@@ -51,7 +51,6 @@ function FoodCard({ item }) {
         }
       });
     }
-    console.log(food, user.email);
   };
   return (
     <div className="card bg-base-100 w-96 shadow-xl">

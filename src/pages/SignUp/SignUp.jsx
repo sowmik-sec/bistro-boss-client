@@ -152,7 +152,7 @@ function SignUp() {
                 />
               </div>
             </form>
-            <p>
+            <p className="px-6">
               <small>
                 Already have an account? <Link to="/login">Login</Link>
               </small>

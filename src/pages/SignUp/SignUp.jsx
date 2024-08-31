@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
+import SocialLogin from "../../components/SocialLogin/SocialLogin";
 
 function SignUp() {
   const axiosPublic = useAxiosPublic();
@@ -157,6 +158,7 @@ function SignUp() {
                 Already have an account? <Link to="/login">Login</Link>
               </small>
             </p>
+            <SocialLogin />
           </div>
         </div>
       </div>

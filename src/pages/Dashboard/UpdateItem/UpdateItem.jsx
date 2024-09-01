@@ -1,20 +1,22 @@
 import { useLoaderData } from "react-router-dom";
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import Swal from "sweetalert2";
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
-function UpdateItem() {
+const UpdateItem = () => {
   const { name, category, recipe, price, _id } = useLoaderData();
 
   const { register, handleSubmit } = useForm();
   const axiosPublic = useAxiosPublic();
   const axiosSecure = useAxiosSecure();
   const onSubmit = async (data) => {
+    console.log(data);
+    // image upload to imgbb and then get an url
     const imageFile = { image: data.image[0] };
     const res = await axiosPublic.post(image_hosting_api, imageFile, {
       headers: {
@@ -30,7 +32,9 @@ function UpdateItem() {
         recipe: data.recipe,
         image: res.data.data.display_url,
       };
+      //
       const menuRes = await axiosSecure.patch(`/menu/${_id}`, menuItem);
+      console.log(menuRes.data);
       if (menuRes.data.modifiedCount > 0) {
         // show success popup
         // reset();
@@ -43,14 +47,9 @@ function UpdateItem() {
         });
       }
     }
+    console.log("with image url", res.data);
   };
-  if (!name) {
-    return (
-      <div>
-        <progress className="progress w-56"></progress>
-      </div>
-    );
-  }
+
   return (
     <div>
       <SectionTitle
@@ -134,6 +133,6 @@ function UpdateItem() {
       </div>
     </div>
   );
-}
+};
 
 export default UpdateItem;

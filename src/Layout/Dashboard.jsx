@@ -68,9 +68,9 @@ function Dashboard() {
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/dashboard/userHome">
+                <NavLink to="/dashboard/history">
                   <FaCalendar />
-                  Reservation
+                  Payment History
                 </NavLink>
               </li>
               <li>
@@ -80,9 +80,9 @@ function Dashboard() {
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/dashboard/bookings">
+                <NavLink to="//dashboard/paymentHistory">
                   <FaList />
-                  My Bookings
+                  Payment Real History
                 </NavLink>
               </li>
             </>
